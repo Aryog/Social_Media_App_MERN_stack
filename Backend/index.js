@@ -5,6 +5,8 @@ import dotenv from "dotenv";
 import AuthRoute from './Routes/AuthRoute.js'
 import UserRoute from './Routes/UserRoute.js'
 import PostRoute from './Routes/PostRoute.js'
+import UploadRoute from './Routes/UploadRoute.js'
+import cors from 'cors'
 // Routes
 
 const app = express();
@@ -12,6 +14,7 @@ const app = express();
 // Middle Wares
 app.use(bodyParser.json({limit: '30mb', extended: true}))
 app.use(bodyParser.urlencoded({limit: '30mb', extended: true}))
+app.use(cors());
 
 dotenv.config();
 const URI = process.env.MONGO_DB;
@@ -35,3 +38,4 @@ app.get("/",(req,res)=>{
 app.use('/auth',AuthRoute);
 app.use('/user',UserRoute);
 app.use('/post',PostRoute);
+app.use('/upload',UploadRoute);
