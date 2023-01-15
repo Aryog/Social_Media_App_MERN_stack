@@ -1,10 +1,11 @@
 import React,{useState,useRef} from 'react'
-import ProfileImage from '../../img/profileImg.jpg'
 import {useDispatch,useSelector} from 'react-redux'
 import './PostShare.css'
-import { uploadImage } from '../../actions/uploadAction';
+import { uploadImage,uploadPost } from '../../actions/uploadAction';
 function PostShare() {
     // eslint-disable-next-line
+    const serverPublic = process.env.REACT_APP_UPLOAD_FOLDER
+    const loading = useSelector((state)=>state.postReducer.uploading)
     const dispatch = useDispatch();
     const [image, setImage] = useState(null);
     const imageRef = useRef();
@@ -16,6 +17,10 @@ function PostShare() {
             let img = e.target.files[0];
             setImage(img);
         }
+    }
+    const reset = ()=>{
+        setImage(null);
+        desc.current.value=""
     }
     const handleSubmit =(e)=>{
         e.preventDefault();
@@ -37,10 +42,12 @@ function PostShare() {
                 console.log(error);   
             }
         }
+        dispatch(uploadPost(newPost))
+        reset()
     }
   return (
     <div className="PostShare">
-       <img src={ProfileImage} alt="" />
+       <img src={user.profilePicture? serverPublic+user.profilePicture : serverPublic + "defaultProfile.png"} alt="" />
     <div>
         <input type="text" placeholder="What's happening" ref={desc} required/>
     
@@ -61,8 +68,8 @@ function PostShare() {
         <i class="fa-solid fa-2x fa-calendar-days"></i>
         &nbsp;Schedule
         </div>
-        <button className='ps-button button' onClick={handleSubmit}>
-            Share
+        <button className='ps-button button' onClick={handleSubmit} disabled={loading}>
+            {loading?"Uploading...":"Share"}
         </button>
         <div style={{display:'none'}}>
             <input type="file" name='myfile' ref={imageRef} onChange={onImageChange}/>
