@@ -1,8 +1,10 @@
 import * as UploadApi from '../api/UploadRequest'
 export const uploadImage =(data)=>async(dispatch)=>{
     try {
-        await UploadApi.uploadImage
+        console.log("image upload started");
+        const res = await UploadApi.uploadImage(data)
+        console.log(res);
     } catch (error) {
         console.log(error)
     }
-}
+};

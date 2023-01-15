@@ -28,6 +28,7 @@ function PostShare() {
             const data= new FormData();
             const filename = Date.now() + image.name;
             data.append("name",filename)
+            data.append("myfile",image)
             newPost.image = filename;
             console.log(newPost);
             try {
@@ -64,7 +65,7 @@ function PostShare() {
             Share
         </button>
         <div style={{display:'none'}}>
-            <input type="file" name="myImage" ref={imageRef} onChange={onImageChange}/>
+            <input type="file" name='myfile' ref={imageRef} onChange={onImageChange}/>
         </div>
     </div>
     {
