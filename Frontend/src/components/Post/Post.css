@@ -18,3 +18,11 @@
     align-items: flex-start;
     gap: 1.5rem;
 }
+.detail>div>img{
+    height: 1.6rem;
+    width: 1.6rem;
+}
+
+.time{
+    float:right
+}

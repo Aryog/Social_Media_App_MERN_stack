@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect,useMemo} from 'react'
 import './Post.css'
 
 import Comment from '../../img/comment.png'
@@ -7,10 +7,37 @@ import Heart from '../../img/like.png'
 import NotLike from '../../img/notlike.png'
 import { useSelector } from 'react-redux'
 import { likePost } from '../../api/PostRequest'
+import { getUser } from '../../api/UserRequest'
+import moment from 'moment'
 const Post = ({data}) => {
+  const serverPublic = process.env.REACT_APP_UPLOAD_FOLDER
   const {user} = useSelector((state)=> state.authReducer.authData)
   const [liked, setLiked] = useState(data.likes.includes(user._id));
   const [likes, setLikes] = useState(data.likes.length)
+  const [firstname, setFirstname] = useState("Unknown")
+  const [lastname, setLastname] = useState("")
+  const [profilePic, setProfilePic] = useState("")
+  // useEffect(() => {
+    //   async function getPostUsername(){
+      //     console.log(id)
+      //     const{data}= getUser(data.userId);
+      //       setFirstname(data.firstname);
+      //       setLastname(data.lastname);
+      //     }
+      //     getPostUsername();
+      // }, [id])
+    let id = data.userId;
+    useMemo(()=>{
+    console.log(id);
+    async function getPostUsername(){
+
+      const {data} =await getUser(id);
+      setFirstname(data.firstname);
+      setLastname(data.lastname);
+      setProfilePic(data.profilePicture);
+    }
+    getPostUsername();
+  },[id])
   
   const handleLike = ()=>{
     setLiked((prev)=>!prev)
@@ -27,7 +54,11 @@ const Post = ({data}) => {
         </div>
         <span style={{color:"var(--gray)",fontSize:'12px'}}>{likes} likes</span>
         <div className="detail">
-            <span><b>{data.name}</b></span>
+          <div className='time'>{moment(data.createdAt).format('MMM Do, YYYY')}</div>
+          <div style={{display:"flex",flexDirection:"row",alignItems:"center"}}>
+            <img src={profilePic.length!==0? serverPublic+profilePic : serverPublic + "defaultProfile.png"} alt="" className='followerImage'/>
+            &nbsp;&nbsp;<span><b>{firstname} {lastname}</b></span>
+          </div>
             <span> {data.desc}</span>
         </div>
     </div>

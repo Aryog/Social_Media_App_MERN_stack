@@ -20,11 +20,9 @@ const InfoCard = () => {
         const fetchProfileUser = async()=>{
             if(profileUserId === user._id){
                 setProfileUser(user)
-                console.log(profileUser);
             } else {
                 const profileUser = await UserApi.getUser(profileUserId)
                 setProfileUser(profileUser);
-                console.log(profileUser)
             }
         }
         fetchProfileUser();
@@ -41,7 +39,7 @@ const InfoCard = () => {
             </h4>
             {user._id===profileUserId?(<div>
                 <i class="fa-solid fa-user-pen" onClick={()=>{setModalOpened(true)}}></i>
-                <ProfileModal modalOpened={modalOpened} setModalOpened={setModalOpened}/>
+                <ProfileModal modalOpened={modalOpened} setModalOpened={setModalOpened} data={user}/>
             </div>):""}
             
         </div>
@@ -51,7 +49,7 @@ const InfoCard = () => {
         </div>
         <div className="info">
             <span><b>Lives in</b></span>
-            <span> {profileUser.livesIn}</span>
+            <span> {profileUser.livesIn}, {profileUser.country}</span>
         </div>
         <div className="info">
             <span><b>Works at</b></span>
