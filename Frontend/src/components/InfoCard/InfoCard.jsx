@@ -38,7 +38,7 @@ const InfoCard = () => {
                 Profile Info
             </h4>
             {user._id===profileUserId?(<div>
-                <i class="fa-solid fa-user-pen" onClick={()=>{setModalOpened(true)}}></i>
+                <i className="fa-solid fa-user-pen" onClick={()=>{setModalOpened(true)}}></i>
                 <ProfileModal modalOpened={modalOpened} setModalOpened={setModalOpened} data={user}/>
             </div>):""}
             

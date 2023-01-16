@@ -12,9 +12,10 @@ const RightSide = () => {
     <div className="RightSide">
         <div className="navIcons">
             <Link to='../home'><img src={Home} alt="" /></Link>
-            <i class="fa-solid fa-2x fa-gear"></i>
+            <i className="fa-solid fa-2x fa-gear"></i>
             <img src={Noti} alt="" />
-            <img src={Comment} alt="" />
+            <Link to="../chat"><img src={Comment} alt="" /></Link>
+            
         </div>
         <TrendCard/>
 

@@ -8,7 +8,7 @@ const LogoSearch = () => {
         <div className='Search'>
             <input type="text" name="text" placeholder='#Explore' />
             <div className="s-icon" style={{paddingLeft:'1rem', alignItem:'center'}}>
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <i className="fa-solid fa-magnifying-glass"></i>
             </div>
         </div>
     </div>

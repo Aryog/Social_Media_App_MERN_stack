@@ -53,19 +53,19 @@ function PostShare() {
     
     <div className="postOptions">
         <div className="option" style={{color:"var(--photo)"}} onClick={()=>imageRef.current.click()}>
-        <i class="fa-solid fa-2x fa-image" ></i>
+        <i className="fa-solid fa-2x fa-image" ></i>
         &nbsp;Photo
         </div>
         <div className="option" style={{color:"var(--video)"}}>
-        <i class="fa-solid fa-2x fa-circle-play"></i>
+        <i className="fa-solid fa-2x fa-circle-play"></i>
         &nbsp;Video
         </div>
         <div className="option" style={{color:"var(--location)"}}>
-        <i class="fa-solid fa-2x fa-location-dot"></i>
+        <i className="fa-solid fa-2x fa-location-dot"></i>
         &nbsp;Location
         </div>
         <div className="option" style={{color:"var(--shedule)"}}>
-        <i class="fa-solid fa-2x fa-calendar-days"></i>
+        <i className="fa-solid fa-2x fa-calendar-days"></i>
         &nbsp;Schedule
         </div>
         <button className='ps-button button' onClick={handleSubmit} disabled={loading}>
@@ -77,7 +77,7 @@ function PostShare() {
     </div>
     {
     image && <div className="previewImage">
-        <i class="fa-solid fa-xmark" onClick={()=>setImage(null)}></i>
+        <i className="fa-solid fa-xmark" onClick={()=>setImage(null)}></i>
         <img src={URL.createObjectURL(image)} alt="" />
     </div> 
     }
