@@ -115,6 +115,7 @@ export const getTimelinePosts = async(req, res)=>{
                     as : "followingPosts"
                 }
             },
+            // get two posts of the user that we have followed
             {
                 $project:{
                     followingPosts : 2,
